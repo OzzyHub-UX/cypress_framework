@@ -43,10 +43,9 @@ describe("Project 01 - Form Elements", () => {
   
     })
   
-    it('Test Case 03 - Validate the Gender Radio Button', () => {
+    it.only('Test Case 03 - Validate the Gender Radio Button', () => {
   
-      cy.visit('https://techglobal-training.com/frontend');
-      cy.clickCard('Project - Form Elements');
+      cy.visit('https://techglobal-training.com/frontend/project-1');
   
       /**
        * Navigate to https://techglobal-training.com/frontend/project-1
@@ -61,23 +60,18 @@ describe("Project 01 - Form Elements", () => {
   
       cy.get('.control > .label').should('have.text', 'Gender *') // .and('have.attr', 'required')
   
-      const options = ['Male', 'Female', 'Prefer not to disclose']
+      const expectedTexts = ['Male', 'Female', 'Prefer not to disclose']
   
       cy.get('.control > [class*="radio"]').each(($el, index) => {
-        cy.wrap($el).should('have.text', options[index])
+        cy.wrap($el).should('have.text', expectedTexts[index])
       })
   
       cy.get('.mr-1').should('be.visible').and('be.enabled')
-  
-      // Validate Male Option
-      cy.get('.control > .label + label :first-child').click().should('be.checked')
-      cy.get('.control > .label + label + label :first-child').should('not.be.checked')
-      cy.get('.control > .label + label + label + label :first-child').should('not.be.checked')
-  
-      // Validate Female Option
-      cy.get('.control > .label + label + label :first-child').click().should('be.checked')
-      cy.get('.control > .label + label :first-child').should('not.be.checked')
-      cy.get('.control > .label + label + label + label :first-child').should('not.be.checked')
+
+      cy.checkOptionAndValidateOthers('Male', expectedTexts)
+      cy.checkOptionAndValidateOthers('Female', expectedTexts)
+
+
   
     })
   

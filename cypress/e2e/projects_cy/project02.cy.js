@@ -1,3 +1,4 @@
+import LoginPage from "../../pages/LoginPagePO2";
 describe('Project - Login Function', ()=> {
 
     it('Test Case 01 - Validate the login form', () => {
@@ -23,21 +24,43 @@ describe('Project - Login Function', ()=> {
 
         const labelInfoUsernamePassword = ['Please enter your username', 'Please enter your password']
 
-        // Input 
         cy.get('form > div:nth-child(2),form > div:nth-child(3)').each(($el,index) => {
-            cy.wrap($el).find('input').should('be.visible').and('not.have.attr', 'required')
-            cy.wrap($el).find('label').should('have.text', labelInfoUsernamePassword[index])
-        })
+            cy.wrap($el)
+            .find('label')
+            .should('be.visible')
+            .and('have.text', labelInfoUsernamePassword[index])
+            .and('not.have.attr', 'required')
 
-    
+            cy.wrap($el)
+            .find('input')
+            .and('be.visible')
+            .and('not.have.attr', 'required')
+        })
 
        const btnText = ['LOGIN', 'Forgot Password?']
 
-       cy.get('#login_btn, #login_btn + a').each(($el, index) => {
-            cy.wrap($el).should('be.')
-       })
-
-
-  
+       cy.get('form > div:nth-child(4)').each(($el, index) => {
+            cy.wrap($el)
+            .find('button')
+            .should('be.visible')
+            .and('be.enabled')
+            .and('have.text', btnText[index])
+            .parent()
+            .find('a')
+            .should('have.text', btnText[1])
+            .and('have.attr', 'href')
+           })
     })
+
+    const loginPage = new LoginPage()
+
+    it('Test Case 02 - Validate the valid login', () => {
+
+        cy.visit('https://techglobal-training.com/frontend');
+        cy.clickCard('Project - Login Function');
+
+        loginPage.userLogin('TechGlobal', 'Test1234')
+        
+    })
+
 })

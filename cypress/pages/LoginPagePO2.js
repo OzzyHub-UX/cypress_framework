@@ -1,5 +1,9 @@
 class LoginPage {
 
+    getLoginForm(){
+        return cy.get(':nth-child(1) > form')
+    }
+
     getUsernameField(){
         return cy.get('#username')
     }
@@ -12,12 +16,20 @@ class LoginPage {
         return cy.get('#login_btn')
     }
 
+    getLogoutButton(){
+        return cy.get('#logout')
+    }
+
     getSuccessMessage(){
         return cy.get('#success_lgn')
     }
 
     clickLoginButton(){
         this.getLoginButton.click()
+    }
+
+    clickLogoutButton(){
+        this.getLogoutButton.click()
     }
 
 

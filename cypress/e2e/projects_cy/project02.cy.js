@@ -24,19 +24,17 @@ describe('Project - Login Function', ()=> {
         const labelInfoUsernamePassword = ['Please enter your username', 'Please enter your password']
 
         // Input 
-        cy.get('form > div + div').find('input').each(($el) => {
-            cy.wrap($el).should('be.visible').and('not.have.attr', 'required')
+        cy.get('form > div:nth-child(2),form > div:nth-child(3)').each(($el,index) => {
+            cy.wrap($el).find('input').should('be.visible').and('not.have.attr', 'required')
+            cy.wrap($el).find('label').should('have.text', labelInfoUsernamePassword[index])
         })
 
-        // Label
-        cy.get('form > div + div').find('label').each(($el, index) => {
-            cy.wrap($el).should('have.text', labelInfoUsernamePassword[index])
-       })
+    
 
        const btnText = ['LOGIN', 'Forgot Password?']
 
        cy.get('#login_btn, #login_btn + a').each(($el, index) => {
-            cy.wrap($el).should('be.visible').and('have.text', btnText[index]).and('be.enabled')
+            cy.wrap($el).should('be.')
        })
 
 

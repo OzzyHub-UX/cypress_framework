@@ -41,6 +41,12 @@ Cypress.Commands.add('haveText2', (selector, value) => {
     cy.get(selector).should('have.text', value)
 })
 
+// Cypress.Commands.add('visitTechGlobalTrainingProject02', () => {
+//     cy.visit('https://techglobal-training.app/frontend/project-2');
+//   });
+
+
+
 /**
  * 	IMPORTANT NOTE
  * 	
@@ -65,7 +71,6 @@ Cypress.Commands.add('haveText2', (selector, value) => {
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
 //
-
 
 Cypress.Commands.add('logText', { prevSubject: true }, (subject) => {
     const text = subject.text()

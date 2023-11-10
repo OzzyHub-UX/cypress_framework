@@ -11,7 +11,7 @@ describe('Project - Login Function', ()=> {
 
         const labelInfoUsernamePassword = ['Please enter your username', 'Please enter your password']
 
-        cy.get('form > div:nth-child(2),form > div:nth-child(3)').each(($el,index) => {
+        loginPage.getUsernamePasswordInputLabel().each(($el,index) => {
             cy.wrap($el)
             .find('label')
             .should('be.visible')
@@ -24,9 +24,9 @@ describe('Project - Login Function', ()=> {
             .and('not.have.attr', 'required')
         })
 
-       const btnText = ['LOGIN', 'Forgot Password?']
+        const btnText = ['LOGIN', 'Forgot Password?']
 
-       cy.get('form > div:nth-child(4)').each(($el, index) => {
+       loginPage.getLoginBtnForgotPassword().each(($el, index) => {
             cy.wrap($el)
             .find('button')
             .should('be.visible')
@@ -46,8 +46,8 @@ describe('Project - Login Function', ()=> {
         cy.clickCard('Project - Login Function');
 
         loginPage.userLogin('TechGlobal', 'Test1234')
-        loginPage.getSuccessMessage.should('be.visible').and('have.text', 'You are logged in')
-        loginPage.getLoginButton.should('be.visible')
+        loginPage.getSuccessMessage().should('be.visible').and('have.text', 'You are logged in')
+        loginPage.getLogoutButton().should('be.visible')
     })
 
 
@@ -57,10 +57,42 @@ describe('Project - Login Function', ()=> {
         cy.clickCard('Project - Login Function');
 
         loginPage.userLogin('TechGlobal', 'Test1234')
-        loginPage.clickLoginButton
-        loginPage.clickLogoutButton
-        loginPage.getLoginForm.should('be.displayed')
+        loginPage.clickLogoutButton()
+        loginPage.getLoginForm().should('be.visible')
 
     })
 
+    it('Test Case 04 = Validate the logout', () => {
+
+        cy.visit('https://techglobal-training.com/frontend');
+        cy.clickCard('Project - Login Function');
+
+        loginPage.getForgotPassword().click()
+        loginPage.getModalHeading().should('be.visible')
+        loginPage.getCloseBtn().should('be.visible')
+
+        loginPage.getEmailInputLabelBox()
+        .find('input')
+        .should('be.visible')
+        .parent()
+        .find('label')
+        .and('have.text', "Enter your email address and we'll send you a link to reset your password. ")
+
+        loginPage.getModalSubmitBtn()
+        .should('be.visible')
+        .and('be.enabled')
+        .and('have.text', 'SUBMIT')
+    })
+
+    it('Test Case 05 - Validate the Reset Password modal close button', () => {
+
+        cy.visit('https://techglobal-training.com/frontend');
+        cy.clickCard('Project - Login Function');
+
+        loginPage.getForgotPassword().click()
+        loginPage.getModalSubHeading().should('be.visible')
+        loginPage.getCloseBtn().click()
+        loginPage.getModal().should('not.exist')
+
+    })
 })

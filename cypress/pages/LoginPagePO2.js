@@ -12,6 +12,14 @@ class LoginPage {
         return cy.get('#password')
     }
 
+    getUsernamePasswordInputLabel(){
+        return cy.get('form > div:nth-child(2),form > div:nth-child(3)')
+    }
+
+    getLoginBtnForgotPassword(){
+        return cy.get('form > div:nth-child(4)')
+    }
+
     getLoginButton(){
         return cy.get('#login_btn')
     }
@@ -24,12 +32,40 @@ class LoginPage {
         return cy.get('#success_lgn')
     }
 
+    getForgotPassword(){
+        return cy.get('.Button_c_button__TmkRS + a')
+    }
+
+    getModal(){
+        return cy.get('.modal')
+    }
+    
+    getModalHeading(){
+        return cy.get('#modal_title')
+    }
+
+    getModalSubHeading(){
+        return cy.get('#sub_heading')
+    }
+
+    getCloseBtn(){
+        return cy.get('.delete')
+    }
+
+    getEmailInputLabelBox(){
+        return cy.get('form:nth-child(3) > div')
+    }
+
+    getModalSubmitBtn(){
+        return cy.get('#submit')
+    }
+
     clickLoginButton(){
-        this.getLoginButton.click()
+        this.getLoginButton().click()
     }
 
     clickLogoutButton(){
-        this.getLogoutButton.click()
+        this.getLogoutButton().click()
     }
 
 
@@ -38,6 +74,8 @@ class LoginPage {
        this.getPasswordField().type(password)
        this.clickLoginButton()
     }
+
+    
 }
 
 

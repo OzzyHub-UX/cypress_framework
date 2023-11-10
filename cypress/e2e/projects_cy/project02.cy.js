@@ -39,7 +39,7 @@ describe('Project - Login Function', ()=> {
            })
     })
 
-    
+
     it('Test Case 02 - Validate the valid login', () => {
 
         cy.visit('https://techglobal-training.com/frontend');
@@ -60,7 +60,6 @@ describe('Project - Login Function', ()=> {
         loginPage.clickLoginButton
         loginPage.clickLogoutButton
         loginPage.getLoginForm.should('be.displayed')
-
 
     })
 

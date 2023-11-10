@@ -39,6 +39,7 @@ describe('Project - Login Function', ()=> {
            })
     })
 
+    
     it('Test Case 02 - Validate the valid login', () => {
 
         cy.visit('https://techglobal-training.com/frontend');
@@ -48,6 +49,7 @@ describe('Project - Login Function', ()=> {
         loginPage.getSuccessMessage.should('be.visible').and('have.text', 'You are logged in')
         loginPage.getLoginButton.should('be.visible')
     })
+
 
     it('Test Case 03 - Validate the logout', () => {
 

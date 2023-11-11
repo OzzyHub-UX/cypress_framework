@@ -39,7 +39,7 @@ class LoginPage {
     getModal(){
         return cy.get('.modal')
     }
-    
+
     getModalHeading(){
         return cy.get('#modal_title')
     }
@@ -60,6 +60,17 @@ class LoginPage {
         return cy.get('#submit')
     }
 
+    getModalConfirmationMsg(){
+        return cy.get('#confirmation_message')
+    }
+
+    clickCloseButton(){
+        this.getCloseBtn().click()
+    }
+
+    clickForgotPassword(){
+        this.getForgotPassword().click()
+    }
     clickLoginButton(){
         this.getLoginButton().click()
     }
@@ -68,6 +79,12 @@ class LoginPage {
         this.getLogoutButton().click()
     }
 
+    clickModalSubmitBtn(){
+        this.getModalSubmitBtn().click()
+    }
+    getErrorMessage(){
+        return cy.get('#error_message')
+    }
 
     userLogin(username, password){
        this.getUsernameField().type(username)
@@ -75,6 +92,13 @@ class LoginPage {
        this.clickLoginButton()
     }
 
+    getErrorMessageValidationUsername(){
+        this.getErrorMessage().should('be.visible').and('have.text', 'Invalid Username entered!')
+    }
+
+    getErrorMessageValidationPassword(){
+        this.getErrorMessage().should('be.visible').and('have.text', 'Invalid Password entered!')
+    }
     
 }
 

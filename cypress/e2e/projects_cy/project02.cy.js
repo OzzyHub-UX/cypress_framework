@@ -67,7 +67,7 @@ describe('Project - Login Function', ()=> {
         cy.visit('https://techglobal-training.com/frontend');
         cy.clickCard('Project - Login Function');
 
-        loginPage.getForgotPassword().click()
+        loginPage.clickForgotPassword()
         loginPage.getModalHeading().should('be.visible')
         loginPage.getCloseBtn().should('be.visible')
 
@@ -89,10 +89,61 @@ describe('Project - Login Function', ()=> {
         cy.visit('https://techglobal-training.com/frontend');
         cy.clickCard('Project - Login Function');
 
-        loginPage.getForgotPassword().click()
+        loginPage.clickForgotPassword()
         loginPage.getModalSubHeading().should('be.visible')
-        loginPage.getCloseBtn().click()
+        loginPage.clickCloseButton()
         loginPage.getModal().should('not.exist')
+    })
+
+    it('Test Case 06 - Validate the Reset Password form Submission', () => {
+
+        cy.visit('https://techglobal-training.com/frontend');
+        cy.clickCard('Project - Login Function');
+
+        loginPage.clickForgotPassword()
+        loginPage.getEmailInputLabelBox().find('input').type('techglobal@gmail.com')
+        loginPage.clickModalSubmitBtn()
+        loginPage.getModalConfirmationMsg().should('be.visible').and('have.text', 'A link to reset your password has been sent to your email address.')
+    })
+
+    it('Test Case 07 - Validate the invalid login with the empty credentials', () => {
+
+        cy.visit('https://techglobal-training.com/frontend');
+        cy.clickCard('Project - Login Function');
+
+        
+        loginPage.clickLoginButton()
+        loginPage.getErrorMessageValidationUsername()
+    })
+
+    it('Test Case 08 - Validate the invalid login with the wrong username', () => {
+        cy.visit('https://techglobal-training.com/frontend');
+        cy.clickCard('Project - Login Function');
+
+        loginPage.userLogin('John', 'Test1234')
+        loginPage.getErrorMessageValidationUsername()
+
+        
+    })
+
+    it('Test Case 09 - Validate the invalid login with the wrong password', () => {
+        
+        cy.visit('https://techglobal-training.com/frontend');
+        cy.clickCard('Project - Login Function');
+
+        loginPage.userLogin('TechGlobal', '1234')
+        loginPage.getErrorMessageValidationPassword()
 
     })
+
+    it('Test Case 10 - Validate the invalid login with the wrong username and password', () => {
+        
+        cy.visit('https://techglobal-training.com/frontend');
+        cy.clickCard('Project - Login Function');
+
+        loginPage.userLogin('John', '1234')
+        loginPage.getErrorMessageValidationUsername()
+
+    })
+
 })

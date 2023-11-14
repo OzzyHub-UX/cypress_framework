@@ -6,15 +6,17 @@ describe("Project - Booking Function", () => {
   it("Test Case 01 - Validate the default Book your trip form", () => {
     cy.visit("https://techglobal-training.netlify.app/frontend/project-3");
 
-        bookingFunction.getOneWayRoundTripRadioButton()
-        .should('be.visible')
-        .and('be.enabled')
-        .and('be.checked')
+        bookingFunction.getOneWayRoundTripRadioButton().each(($el) => {
+          cy.wrap($el)
+          .should('be.visible')
+          .and('be.enabled')
+        })
+
+        bookingFunction.getOneWayRadioButton()
+        .should('be.checked')
 
         bookingFunction.getRoundTripRadioButton()
-        .should('be.visible')
-        .and('be.enabled')
-        .and('not.be.checked')
+        .should('not.be.checked')
 
         bookingFunction.getCabinFromTo().find('label').each(($el) => {
             cy.wrap($el)

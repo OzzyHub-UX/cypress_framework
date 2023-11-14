@@ -4,7 +4,7 @@ class BookingFunction {
         return cy.get('.mr-1')
     }
 
-    getOneWayRoundTripRadioButton(){
+    getOneWayRadioButton(){
         return cy.get('.radio:nth-child(1) > input')
     }
 

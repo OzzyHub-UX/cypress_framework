@@ -18,6 +18,7 @@ describe("Project - Booking Function", () => {
         bookingFunction.getRoundTripRadioButton()
         .should('not.be.checked')
 
+        
         bookingFunction.getCabinFromTo().find('label').each(($el) => {
             cy.wrap($el)
             .should('be.visible')

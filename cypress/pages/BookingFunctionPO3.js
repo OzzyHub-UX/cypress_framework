@@ -24,6 +24,8 @@ class BookingFunction {
         return cy.get('.field:nth-child(6)')
     }
 
+    validateLabels
+
 }
 
 export default BookingFunction

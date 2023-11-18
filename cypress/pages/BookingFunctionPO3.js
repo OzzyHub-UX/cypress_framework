@@ -4,27 +4,13 @@ class BookingFunction {
         return cy.get('.mr-1')
     }
 
-    getOneWayRadioButton(){
-        return cy.get('.radio:nth-child(1) > input')
+    getLables(){
+        return cy.get('.field > label')
     }
 
-    getRoundTripRadioButton(){
-        return cy.get('.radio:nth-child(2) > input')
+    getBookButton(){
+        return cy.get('.Button_c_button__TmkRS')
     }
-
-    getCabinFromTo(){
-        return cy.get('.field:nth-child(2),.field:nth-child(3),.field:nth-child(4)')
-    }
-
-    getDepart(){
-        return cy.get('.field:nth-child(5)')
-    }
-
-    getReturn(){
-        return cy.get('.field:nth-child(6)')
-    }
-
-    validateLabels
 
 }
 

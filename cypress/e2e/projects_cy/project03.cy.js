@@ -3,49 +3,43 @@ import BookingFunction from "../../pages/BookingFunctionPO3";
 const bookingFunction = new BookingFunction();
 
 describe("Project - Booking Function", () => {
-  it("Test Case 01 - Validate the default Book your trip form", () => {
+
+  beforeEach(() => {
+    cy.fixture('bookingFuncton.json').then(function(data) {
+        this.NumberOfPassengersDefault = data.NumberOfPassengersDefault
+        this.Passenger1Default = data.Passenger1Default
+    })
+  })
+
+    
+  it("Test Case 01 - Validate the default Book your trip form", function() {
     cy.visit("https://techglobal-training.netlify.app/frontend/project-3");
 
-        bookingFunction.getOneWayRoundTripRadioButton().each(($el) => {
+        bookingFunction.getOneWayRoundTripRadioButton().each(($el, index) => {
           cy.wrap($el)
           .should('be.visible')
           .and('be.enabled')
+
+          if(index === 0) cy.wrap($el).should('be.checked')
+          if(index === 1) cy.wrap($el).should('not.be.checked')
         })
 
-        bookingFunction.getOneWayRadioButton()
-        .should('be.checked')
 
-        bookingFunction.getRoundTripRadioButton()
-        .should('not.be.checked')
+        bookingFunction.getLables().each(($el, index) => {
+          cy.wrap($el)
+          .should('be.visible')
+          .next()
+          .and('be.visible')
 
-        
-        bookingFunction.getCabinFromTo().find('label').each(($el) => {
-            cy.wrap($el)
-            .should('be.visible')
+          if(index === 4) cy.wrap($el).next().find('input').should('have.attr', 'disabled')
+          if(index === 5) cy.wrap($el).next().find('option').should('have.value', this.NumberOfPassengersDefault)
+          if(index === 6) cy.wrap($el).next().find('option').should('have.value', this.Passenger1Default)
         })
 
-        bookingFunction.getCabinFromTo().find('.select').each(($el) => {
-            cy.wrap($el)
-            .should('be.visible')
-        })
-
-        bookingFunction.getDepart()
-        .find('label')
+        bookingFunction.getBookButton()
         .should('be.visible')
-        .parent()
-        .find('.control')
-        .and('be.visible')
+        .and('be.enabled')
 
-        bookingFunction.getReturn()
-        .find('label')
-        .should('be.visible')
-        .parent()
-        .find('input')
-        .and('be.disabled')
+    })
+  })
 
-
-
-        
-
-  });
-});

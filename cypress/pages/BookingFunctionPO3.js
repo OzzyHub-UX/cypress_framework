@@ -16,9 +16,19 @@ class BookingFunction {
         return cy.get('.field > label')
     }
 
+    getSelect(){
+        return cy.get('.field select')
+    }
+
     getBookButton(){
         return cy.get('.Button_c_button__TmkRS')
     }
+
+    getDatePicker(){
+        return cy.get('.control:nth-child(2) input')
+    }
+
+    e
 
     clickOnRoundTrip(){
         return this.getRoundTripRadioButton().click()
@@ -31,6 +41,8 @@ class BookingFunction {
     clickOnBook(){
         return this.getBookButton().click()
     }
+
+
 
     getADateAWeekFromToday(){
         const date = new Date()
@@ -47,6 +59,8 @@ class BookingFunction {
         let currentYear = date.getFullYear()
         return (`${currentMonth}/${currentDay}/${currentYear}`)
     }
+
+
 
 }
 

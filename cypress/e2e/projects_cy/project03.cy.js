@@ -10,6 +10,7 @@ describe("Project - Booking Function", () => {
       this.OneWayOnePassenger = data.OneWayOnePassenger;
       this.OneWeekDate = data.OneWeekDate;
       this.NumberOfPassengerPassenger1Default = data.NumberOfPassengerPassenger1Default;
+      this.Ticket1 = data.Ticket1;
     });
   });
 
@@ -54,7 +55,7 @@ describe("Project - Booking Function", () => {
       .contains("One way")
       .should("not.be.checked");
 
-    bookingFunction.getLables().each(($el, index) => {
+    bookingFunction.getLables().each(($el) => {
       cy.wrap($el).should("be.visible").next().and("be.visible");
 
       if ($el.text().includes('Number of passengers'))
@@ -73,21 +74,18 @@ describe("Project - Booking Function", () => {
     bookingFunction.getBookButton().should("be.visible").and("be.enabled");
   });
 
+  const nextWeekFromTodayDay = bookingFunction.getADateAWeekFromToday()
 
-  it("Test Case 03 - Validate the booking for 1 passenger and one way", function () {
+  it.only("Test Case 03 - Validate the booking for 1 passenger and one way", function () {
     cy.visit("https://techglobal-training.netlify.app/frontend/project-3");
 
     bookingFunction.clickOnOneWay();
 
-    bookingFunction.getLables().each(($el, index) => {
+    bookingFunction.getSelect().each(($el, index) => {
+      cy.wrap($el).select(this.Ticket1[index])
+    })
 
-      if ($el.text().includes('Depart')) cy.wrap($el).next().children().type(this.OneWeekDate);
-      else if ($el.text().includes('Return'))
-        cy.wrap($el).next().find("input").should("have.attr", "disabled");
-
-      cy.wrap($el).next().children().select(this.OneWayOnePassenger[index]);
-    });
-
+    bookingFunction.getDatePicker().type(bookingFunction.getADateAWeekFromToday())
     bookingFunction.clickOnBook();
 
   });

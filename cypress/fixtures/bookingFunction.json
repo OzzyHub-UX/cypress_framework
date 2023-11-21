@@ -4,9 +4,9 @@
     "NumberOfPassengerPassenger1Default": ["1", "Adult (16-64)"],
     "OneWayOnePassenger": ["Business", "Illinois", "Florida", "1", "Senior (65+)"],
     "OneWeekDate": "11/25/1990{enter}",
-
-    "Ticket1": ["Business", "Illinois", "Florida", "1", "Adult (16-64)"]
-    
-
+    "Ticket1": ["Business", "Illinois", "Florida", "1", "Adult (16-64)"],
+    "Ticket2": ["First", "California", "Illinois", "1", "Adult (16-64)"],
+    "Ticket3": ["Premium Economy", "New York", "Texas", "2", "Adult (16-64)", "Child (2-11)"],
+    "Ticket3Child": "Child (2-11)"
 }
 

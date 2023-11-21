@@ -9,8 +9,10 @@ describe("Project - Booking Function", () => {
       this.Passenger1Default = data.Passenger1Default;
       this.OneWayOnePassenger = data.OneWayOnePassenger;
       this.OneWeekDate = data.OneWeekDate;
+      this.NumberOfPassengerPassenger1Default = data.NumberOfPassengerPassenger1Default;
     });
   });
+
 
   it("Test Case 01 - Validate the default Book your trip form", function () {
     cy.visit("https://techglobal-training.netlify.app/frontend/project-3");
@@ -18,31 +20,28 @@ describe("Project - Booking Function", () => {
     bookingFunction.getOneWayRoundTripRadioButton().each(($el, index) => {
       cy.wrap($el).should("be.visible").and("be.enabled");
 
-      if (index === 0) cy.wrap($el).should("be.checked");
-      if (index === 1) cy.wrap($el).should("not.be.checked");
+      if ($el.text().includes('One way')) cy.wrap($el).should("be.checked");
+      else if ($el.text().includes('Round trip')) cy.wrap($el).should("not.be.checked");
     });
+
 
     bookingFunction.getLables().each(($el, index) => {
       cy.wrap($el).should("be.visible").next().and("be.visible");
 
-      if (index === 4)
+      if ($el.text().includes('Return'))
         cy.wrap($el).next().find("input").should("have.attr", "disabled");
 
-      if (index === 5)
+      if ($el.text().includes('Number of passengers') || $el.text().includes('Passenger'))
         cy.wrap($el)
           .next()
           .find("option")
-          .should("have.value", this.NumberOfPassengersDefault);
-
-      if (index === 6)
-        cy.wrap($el)
-          .next()
-          .find("option")
-          .should("have.value", this.Passenger1Default);
+          .should("have.value", this.NumberOfPassengerPassenger1Default[index - 5]);
     });
 
     bookingFunction.getBookButton().should("be.visible").and("be.enabled");
+
   });
+
 
   it("Test Case 02 - Validate the Book your trip form when Round trip is selected", function () {
     cy.visit("https://techglobal-training.netlify.app/frontend/project-3");
@@ -58,12 +57,13 @@ describe("Project - Booking Function", () => {
     bookingFunction.getLables().each(($el, index) => {
       cy.wrap($el).should("be.visible").next().and("be.visible");
 
-      if (index === 5)
+      if ($el.text().includes('Number of passengers'))
         cy.wrap($el)
           .next()
           .find("option")
           .should("have.value", this.NumberOfPassengersDefault);
-      if (index === 6)
+
+      else if ($el.text().includes('Passenger'))
         cy.wrap($el)
           .next()
           .find("option")
@@ -73,19 +73,22 @@ describe("Project - Booking Function", () => {
     bookingFunction.getBookButton().should("be.visible").and("be.enabled");
   });
 
-  it.only("Test Case 03 - Validate the booking for 1 passenger and one way", function () {
+
+  it("Test Case 03 - Validate the booking for 1 passenger and one way", function () {
     cy.visit("https://techglobal-training.netlify.app/frontend/project-3");
 
     bookingFunction.clickOnOneWay();
 
     bookingFunction.getLables().each(($el, index) => {
-      if (index === 3) cy.wrap($el).next().children().type(this.OneWeekDate);
-      if (index === 4)
+
+      if ($el.text().includes('Depart')) cy.wrap($el).next().children().type(this.OneWeekDate);
+      else if ($el.text().includes('Return'))
         cy.wrap($el).next().find("input").should("have.attr", "disabled");
 
       cy.wrap($el).next().children().select(this.OneWayOnePassenger[index]);
     });
 
     bookingFunction.clickOnBook();
+
   });
 });

@@ -1,6 +1,8 @@
 {
     "NumberOfPassengersDefault": "1",
     "Passenger1Default": "Adult (16-64)",
+    "NumberOfPassengerPassenger1Default": ["1", "Adult (16-64)"],
     "OneWayOnePassenger": ["Business", "Illinois", "Florida", "1", "Senior (65+)"],
     "OneWeekDate": "11/25/1990{enter}"
 }
+

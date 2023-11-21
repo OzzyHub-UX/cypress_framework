@@ -32,6 +32,22 @@ class BookingFunction {
         return this.getBookButton().click()
     }
 
+    getADateAWeekFromToday(){
+        const date = new Date()
+        let nextWeekFromTodayDay = String(date.getDate() + 7)
+        let currentMonth = String(date.getMonth() + 1)
+        let currentYear = date.getFullYear()
+        return (`${currentMonth}/${nextWeekFromTodayDay}/${currentYear}`)
+    }
+
+    getaADateAMonthFromToday(){
+        const date = new Date()
+        let currentDay = String(date.getDate() + 7)
+        let currentMonth = String(date.getMonth() + 2)
+        let currentYear = date.getFullYear()
+        return (`${currentMonth}/${currentDay}/${currentYear}`)
+    }
+
 }
 
 export default BookingFunction
